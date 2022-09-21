@@ -7,6 +7,8 @@ import {
   StepLabel,
   Box,
   Button,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
@@ -39,7 +41,7 @@ function getStepContent(step, setData, getData) {
 
 export default function Index() {
   const [getData, setData] = useState({});
-
+  const [open, setOpen] = useState(false);
   const [getActiveStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
@@ -66,6 +68,15 @@ export default function Index() {
     text = text.replaceAll(`${getData.type}`, `*${getData.type}*`);
 
     navigator.clipboard.writeText(text);
+
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
   };
 
   return (
@@ -127,6 +138,15 @@ export default function Index() {
                 Copiar
               </Button>
             )}
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+              <Alert
+                onClose={handleClose}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                This is a success message!
+              </Alert>
+            </Snackbar>
             {getActiveStep < 3 && (
               <Button
                 variant="contained"
