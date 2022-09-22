@@ -62,6 +62,7 @@ export default function Index() {
     text = text.replaceAll("{", "");
     text = text.replaceAll("}", "");
     text = text.replaceAll(",", "\n");
+    text = text.replaceAll("\\n", "\n");
     text = text.replaceAll('"', "");
     text = text.replaceAll(":", ": ");
     text = text.replaceAll("type: ", "");
